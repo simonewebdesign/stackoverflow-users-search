@@ -1,3 +1,28 @@
-<h1>Main#index</h1>
-<p>Find me in app/views/main/index.html.erb</p>
-<%= @json %>
+<h1>Listing users</h1>
+
+<%= form_tag("/search", method: "get") do %>
+  <%= label_tag(:user, "Search for:") %>
+  <%= text_field_tag(:user) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% unless @users.empty? %>
+
+<% p @users %>
+
+<h2>Displaying results for: <%= params[:user] %></h2>
+
+<% @users.each {|user| %>
+
+<div>
+  <span><%= user[:display_name] %></span> - 
+  <span><%= user[:reputation] %></span>
+</div>
+
+<% } %>
+
+<% else %>
+
+<h2>No users.</h2>
+
+<% end %>
